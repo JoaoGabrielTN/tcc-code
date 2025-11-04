@@ -73,7 +73,8 @@ def topology():
 	for id, car in enumerate(net.cars):
 		car.setIP('192.168.0.{}/24'.format(id+1), intf='{}'.format(car.wintfs[0].name))
 		car.setIP('192.168.1.{}/24'.format(id+1), intf='{}'.format(car.wintfs[1].name))
-		car.cmdPrint('iw dev %s-wlan0 connect vanet-ssid' % car)
+		car.cmdPrint('./auto-up.sh &')
+		car.cmdPrint('iperf3 -s &')
 
 	nodes = net.cars + net.aps
 	net.telemetry(nodes=nodes, data_type='position',
